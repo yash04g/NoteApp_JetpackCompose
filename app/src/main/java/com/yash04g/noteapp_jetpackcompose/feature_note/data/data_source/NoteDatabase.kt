@@ -10,5 +10,9 @@ import com.yash04g.noteapp_jetpackcompose.feature_note.domain.model.Note
 )
 abstract class NoteDatabase: RoomDatabase() {
 
-    abstract class noteDao: NoteDao
+    abstract val noteDao: NoteDao
+
+    companion object {
+        const val DATABASE_NAME = "notes_db"
+    }
 }
