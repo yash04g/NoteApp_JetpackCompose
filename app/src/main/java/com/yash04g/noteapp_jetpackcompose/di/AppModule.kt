@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.yash04g.noteapp_jetpackcompose.feature_note.data.data_source.NoteDatabase
 import com.yash04g.noteapp_jetpackcompose.feature_note.data.repository.NoteRepositoryImpl
 import com.yash04g.noteapp_jetpackcompose.feature_note.domain.repository.NoteRepository
+import com.yash04g.noteapp_jetpackcompose.feature_note.domain.use_case.AddNoteUseCase
 import com.yash04g.noteapp_jetpackcompose.feature_note.domain.use_case.DeleteNoteUseCase
 import com.yash04g.noteapp_jetpackcompose.feature_note.domain.use_case.GetNotesUseCase
 import com.yash04g.noteapp_jetpackcompose.feature_note.domain.use_case.NoteUseCases
@@ -39,7 +40,8 @@ object AppModule {
     fun provideNoteUseCases(repository: NoteRepository): NoteUseCases {
         return NoteUseCases(
             getNotes = GetNotesUseCase(repository),
-            deleteNote = DeleteNoteUseCase(repository)
+            deleteNote = DeleteNoteUseCase(repository),
+            addNote = AddNoteUseCase(repository),
         )
     }
 }
