@@ -50,7 +50,7 @@ fun NotesScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("Your Note", style = MaterialTheme.typography.h4)
+                Text("Your Notes", style = MaterialTheme.typography.h4)
                 IconButton(onClick = { viewModel.onEvent(NotesEvent.ToggleOrderSection) }) {
                     Icon(imageVector = Icons.Default.Sort, contentDescription = "Sort")
                 }
@@ -99,7 +99,6 @@ fun NotesScreen(
                         }
                     )
                     Spacer(modifier = Modifier.height(16.dp))
-
                 }
             }
         }

@@ -48,12 +48,12 @@ class AddEditNoteViewModel @Inject constructor(
                 viewModelScope.launch {
                     noteUseCases.getNote(id = noteId)?.also { note ->
                         currentNodeId = note.id
-                        _noteTitle.value = noteTitle.value.copy(
+                        _noteTitle.value = _noteTitle.value.copy(
                             text = note.title,
                             isHintVisible = false
                         )
-                        _noteContent.value = noteContent.value.copy(
-                            text = note.title,
+                        _noteContent.value = _noteContent.value.copy(
+                            text = note.content,
                             isHintVisible = false
                         )
                         _noteColor.value = note.color
@@ -69,20 +69,20 @@ class AddEditNoteViewModel @Inject constructor(
                 _noteColor.value = events.color
             }
             is AddEditNoteEvent.ChangeContentFocus -> {
-                _noteContent.value.copy(
-                    isHintVisible = !events.focusState.isFocused && _noteContent.value.hint.isEmpty()
+                _noteContent.value = _noteContent.value.copy(
+                    isHintVisible = !events.focusState.isFocused && noteContent.value.text.isEmpty()
                 )
             }
             is AddEditNoteEvent.ChangeTitleFocus -> {
-                _noteTitle.value.copy(
-                    isHintVisible = !events.focusState.isFocused && _noteTitle.value.hint.isEmpty()
+                _noteTitle.value = _noteTitle.value.copy(
+                    isHintVisible = !events.focusState.isFocused && noteTitle.value.text.isEmpty()
                 )
             }
             is AddEditNoteEvent.EnteredContent -> {
-                _noteContent.value.copy(text = events.value)
+                _noteContent.value = _noteContent.value.copy(text = events.value)
             }
             is AddEditNoteEvent.EnteredTitle -> {
-                _noteTitle.value.copy(text = events.value)
+                _noteTitle.value = _noteTitle.value.copy(text = events.value)
             }
             AddEditNoteEvent.SaveNote -> {
                 viewModelScope.launch {
