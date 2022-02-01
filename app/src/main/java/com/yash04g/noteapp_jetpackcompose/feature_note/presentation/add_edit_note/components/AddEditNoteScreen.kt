@@ -85,16 +85,21 @@ fun AddEditNoteScreen(
                             .size(50.dp)
                             .shadow(15.dp, CircleShape)
                             .clip(CircleShape)
+                            .background(Note.noteColors[index])
                             .border(
                                 width = 3.dp,
-                                color = if (viewModel.noteColor.value == colorInt) Color.Black else Color.Transparent,
+                                color = if (viewModel.noteColor.value == colorInt) {
+                                    Color.Black
+                                } else Color.Transparent,
                                 shape = CircleShape
                             )
                             .clickable {
                                 scope.launch {
                                     noteBackgroundAnimatable.animateTo(
                                         targetValue = Color(colorInt),
-                                        animationSpec = tween(durationMillis = 500)
+                                        animationSpec = tween(
+                                            durationMillis = 500
+                                        )
                                     )
                                 }
                                 viewModel.onEvent(AddEditNoteEvent.ChangeColor(colorInt))
