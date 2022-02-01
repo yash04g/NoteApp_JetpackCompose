@@ -19,6 +19,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.yash04g.noteapp_jetpackcompose.feature_note.presentation.notes.NotesEvent
 import com.yash04g.noteapp_jetpackcompose.feature_note.presentation.notes.NotesViewModel
+import com.yash04g.noteapp_jetpackcompose.feature_note.presentation.util.Screen
 import kotlinx.coroutines.launch
 
 @Composable
@@ -31,7 +32,9 @@ fun NotesScreen(
     val scope = rememberCoroutineScope()
     Scaffold(floatingActionButton = {
         FloatingActionButton(
-            onClick = { /*TODO*/ },
+            onClick = {
+                navController.navigate(Screen.AddEditScreen.route)
+            },
             backgroundColor = MaterialTheme.colors.primary
         ) {
             Icon(imageVector = Icons.Default.Add, contentDescription = "Add Note")
@@ -78,7 +81,9 @@ fun NotesScreen(
                         note = note,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable {},
+                            .clickable {
+                                navController.navigate(Screen.AddEditScreen.route + "?noteId=${note.id}&noteColor=${note.color}")
+                            },
                         onDeleteClick = {
                             viewModel.onEvent(NotesEvent.DeleteNote(note))
                             // Showing a snackbar needs a coroutine, because it takes time to show it
